@@ -1,0 +1,56 @@
+project:
+  random_seed: 42
+
+paths:
+  raw_reddit: data/raw/reddit_posts.parquet
+  raw_market: data/raw/market_daily.parquet
+  weekly_dataset: data/processed/weekly_dataset.parquet
+  models_dir: models
+  reports_dir: reports
+
+time:
+  start_date: "2019-01-01"
+  end_date: "2026-01-01"
+  week_frequency: "W-SUN"
+
+assets:
+  BTC:
+    ticker: "BTC-USD"
+    subreddits: ["Bitcoin", "CryptoCurrency", "CryptoMarkets"]
+    keywords: ["bitcoin", "btc", "halving", "on-chain"]
+  DOGE:
+    ticker: "DOGE-USD"
+    subreddits: ["dogecoin", "CryptoCurrency"]
+    keywords: ["doge", "dogecoin", "elon", "meme coin"]
+  SPY:
+    ticker: "SPY"
+    subreddits: ["stocks", "investing", "wallstreetbets"]
+    keywords: ["spy", "s&p 500", "market", "fomc"]
+
+reddit:
+  source: "arctic_shift"
+  max_posts_per_query: 600
+  include_comments: false
+  max_comments_per_post: 30
+  min_text_length: 15
+
+label:
+  horizon_weeks: 1
+  neutral_threshold: 0.002
+  drop_neutral: true
+
+features:
+  sentiment_backend: "vader"
+  finbert_model_name: "ProsusAI/finbert"
+  finbert_batch_size: 16
+  finbert_max_length: 256
+  tfidf_max_features: 8000
+  tfidf_min_df: 2
+  tfidf_ngram_range: [1, 2]
+  keyword_lexicon: ["bull", "bear", "moon", "dump", "pump", "long", "short", "buy", "sell", "rally", "crash"]
+
+validation:
+  train_min_weeks: 78
+  val_weeks: 12
+  step_weeks: 4
+  test_weeks: 26

@@ -1,0 +1,30 @@
+models:
+  naive_persistence:
+    enabled: true
+  market_logreg:
+    enabled: true
+    C: 1.0
+    max_iter: 2000
+  text_logreg:
+    enabled: true
+    C: 1.0
+    max_iter: 2000
+  hybrid_logreg:
+    enabled: true
+    C: 0.8
+    max_iter: 2500
+  linear_svm:
+    enabled: true
+    C: 1.0
+  random_forest:
+    enabled: true
+    n_estimators: 300
+    max_depth: 8
+    min_samples_leaf: 8
+  xgboost:
+    enabled: false
+    n_estimators: 400
+    max_depth: 4
+    learning_rate: 0.05
+    subsample: 0.8
+    colsample_bytree: 0.8
